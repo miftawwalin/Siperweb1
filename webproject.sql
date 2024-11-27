@@ -41,6 +41,7 @@ CREATE TABLE `account` (
 INSERT INTO `account` (`id_account`, `email`, `password`, `akses`) VALUES
 (1, 'rekka31@gmail.com', 'e00cf25ad42683b3df678c61f42c6bda', 2),
 (2, 'ryan2@gmail.com', 'ryan123', 2);
+(3, 'Mifta3@gmail.com', 'mifta33', 3);
 
 -- --------------------------------------------------------
 
