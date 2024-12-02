@@ -1,5 +1,7 @@
 <?php
 require "connection/koneksi.php"; // Ensure this file contains a valid database connection
+ 
+
 
 $count_query_buku = "SELECT COUNT(*) AS total_records FROM tbldata_buku";
 $count_query_sekolah = "SELECT COUNT(*) AS total_records FROM tbldata_sekolah";
