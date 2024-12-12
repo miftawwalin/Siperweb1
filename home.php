@@ -1,8 +1,10 @@
 <?php
 require "connection/koneksi.php"; // Ensure this file contains a valid database connection
- 
-
-
+//echo $_SESSION['username'];
+if (!isset($_SESSION['username'])) {
+  //header("Location: login.php");
+  //exit();
+}
 $count_query_buku = "SELECT COUNT(*) AS total_records FROM tbldata_buku";
 $count_query_sekolah = "SELECT COUNT(*) AS total_records FROM tbldata_sekolah";
 
@@ -10,6 +12,7 @@ $count_buku = mysqli_query($conn, $count_query_buku);
 $total_buku = mysqli_fetch_assoc($count_buku)['total_records'];
 $count_sekolah = mysqli_query($conn, $count_query_sekolah);
 $total_sekolah = mysqli_fetch_assoc($count_sekolah)['total_records'];
+
 
 $activePage = basename($_SERVER['PHP_SELF'], ".php");
 ?>
@@ -64,5 +67,4 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
 </body>
 </html>
 <?php
-
 ?>

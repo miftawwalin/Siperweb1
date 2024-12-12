@@ -49,26 +49,54 @@ if (isset($_POST['submit'])) {
   $password = $_POST['password'];
   $confirm_password = $_POST['confirm_password'];
 
-  if ($password == $confirm_password) {
-    // Insert the new account into the database
-    $query = "INSERT INTO account(id_account, email, password, akses) VALUES('', '$email', md5('$password'), 2)";
-    
-    if (mysqli_query($conn, $query)) {
-      echo "<script>
-        Swal.fire({
-          title: 'Pendaftaran Berhasil!',
-          text: 'Akun Anda telah berhasil didaftarkan.',
-          icon: 'success',
-          confirmButtonText: 'Ok'
-        }).then(function() {
-          window.location.href = 'login.php';
-        });
-      </script>";
+   $email_check_query = "SELECT * FROM account WHERE email = '$email'";
+  $result = mysqli_query($conn, $email_check_query);
+  
+  if (mysqli_num_rows($result) > 0) {
+    // Email already exists
+    echo "<script>
+      Swal.fire({
+        title: 'Email Sudah Terdaftar!',
+        text: 'Email ini sudah digunakan oleh akun lain. Silakan gunakan email lain.',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      }).then(function() {
+        window.location.href = 'signup.php';
+      });
+    </script>";
+  } else {
+    if ($password == $confirm_password) {
+      // Insert the new account into the database
+      $query = "INSERT INTO account(id_account, email, password, akses) VALUES('', '$email', md5('$password'), 2)";
+      
+      if (mysqli_query($conn, $query)) {
+        echo "<script>
+          Swal.fire({
+            title: 'Pendaftaran Berhasil!',
+            text: 'Akun Anda telah berhasil didaftarkan.',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+          }).then(function() {
+            window.location.href = 'login.php';
+          });
+        </script>";
+      } else {
+        echo "<script>
+          Swal.fire({
+            title: 'Pendaftaran Gagal!',
+            text: 'Terjadi kesalahan saat mendaftar.',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+          }).then(function() {
+            window.location.href = 'signup.php';
+          });
+        </script>";
+      }
     } else {
       echo "<script>
         Swal.fire({
-          title: 'Pendaftaran Gagal!',
-          text: 'Terjadi kesalahan saat mendaftar.',
+          title: 'Password Tidak Sama!',
+          text: 'Pastikan password dan konfirmasi password Anda sama.',
           icon: 'error',
           confirmButtonText: 'Ok'
         }).then(function() {
@@ -76,17 +104,6 @@ if (isset($_POST['submit'])) {
         });
       </script>";
     }
-  } else {
-    echo "<script>
-      Swal.fire({
-        title: 'Password Tidak Sama!',
-        text: 'Pastikan password dan konfirmasi password Anda sama.',
-        icon: 'error',
-        confirmButtonText: 'Ok'
-      }).then(function() {
-        window.location.href = 'signup.php';
-      });
-    </script>";
   }
 }
 ?>

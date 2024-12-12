@@ -159,9 +159,9 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
                                               <td><?=$row['no_induk'];?></td>
                                               <td><?=$row['nm_sekolah'];?></td>
                                               <td><?=$row['alamat'];?></td>
-                                              <td><?=$row['email'];?></td>
+                                              <td><?=$row['email_sekolah'];?></td>
                                               <td>
-                                                  <button class="btn btn-secondary" onclick="window.location.href='data_buku.php?id_edit=<?=$row['no_induk'];?>'">Lihat Data</button>
+                                                  <button class="btn btn-secondary" onclick="window.location.href='view_data_buku.php?id_edit=<?=$row['no_induk'];?>'">Lihat Data</button>
                                               </td>
                                               <td>
                                                   <button class="btn btn-primary" onclick="window.location.href='sekolah.php?id_edit=<?=$row['no_induk'];?>'">Edit</button>

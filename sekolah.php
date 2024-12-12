@@ -8,12 +8,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $no_induk = $_POST['no_induk'];
     $nm_sekolah = $_POST['nm_sekolah'];
     $alamat = $_POST['alamat'];
-    $email = $_POST['email'];
+    $email_sekolah = $_POST['email_sekolah'];
     
     // Check if we're updating an existing record
     if ($id_edit) {
         // Update the existing record
-        $query = "UPDATE tbldata_sekolah SET nm_sekolah = '$nm_sekolah', alamat = '$alamat', email = '$email' WHERE no_induk = '$no_induk'";
+        $query = "UPDATE tbldata_sekolah SET nm_sekolah = '$nm_sekolah', alamat = '$alamat', email_sekolah = '$email_sekolah' WHERE no_induk = '$no_induk'";
         
         if (mysqli_query($conn, $query)) {
             echo 'success|Data Berhasil di Update';
@@ -22,8 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } else {
         // Insert a new record
-        $query = "INSERT INTO tbldata_sekolah (no_induk, nm_sekolah, alamat, email) 
-                  VALUES ('$no_induk', '$nm_sekolah', '$alamat', '$email')";
+        $query = "INSERT INTO tbldata_sekolah (no_induk, nm_sekolah, alamat, email_sekolah) 
+                  VALUES ('$no_induk', '$nm_sekolah', '$alamat', '$email_sekolah')";
         if (mysqli_query($conn, $query)) {
             echo 'success|Data Tersimpan';
         } else {
@@ -45,7 +45,7 @@ if (isset($_GET['id_edit'])) {
         $no_induk = $row['no_induk'];
         $nm_sekolah = $row['nm_sekolah'];
         $alamat = $row['alamat'];
-        $email = $row['email'];
+        $email_sekolah = $row['email_sekolah'];
     } else {
         echo 'error|Record not found!';
         exit;
@@ -55,7 +55,7 @@ if (isset($_GET['id_edit'])) {
     $no_induk = '';
     $nm_sekolah = '';
     $alamat = '';
-    $email = '';
+    $email_sekolah = '';
 }
 ?>
 
@@ -107,8 +107,8 @@ if (isset($_GET['id_edit'])) {
                             <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat" value="<?= $alamat ?>" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="<?= $email ?>" required>
+                            <label for="email_sekolah">Email</label>
+                            <input type="email_sekolah" class="form-control" id="email_sekolah" name="email_sekolah" placeholder="Email" value="<?= $email_sekolah ?>" required>
                         </div>
                         <button type="button" class="btn btn-primary" id="save">Simpan</button>
                         <button type="button" class="btn btn-secondary" id="backButton">Kembali</button>
@@ -126,7 +126,7 @@ if (isset($_GET['id_edit'])) {
         var no_induk = document.getElementById('no_induk').value;
         var nm_sekolah = document.getElementById('nm_sekolah').value;
         var alamat = document.getElementById('alamat').value;
-        var email = document.getElementById('email').value;
+        var email_sekolah = document.getElementById('email_sekolah').value;
 
         // Check if any field is empty
         if (no_induk == '') {
@@ -141,8 +141,8 @@ if (isset($_GET['id_edit'])) {
             Swal.fire('Error!', 'Alamat kosong.', 'error');
             return;
         }
-        if (email == '') {
-            Swal.fire('Error!', 'Email kosong.', 'error');
+        if (email_sekolah == '') {
+            Swal.fire('Error!', 'email_sekolah kosong.', 'error');
             return;
         }
 
