@@ -17,7 +17,7 @@ require "connection/koneksi.php";
     <div class="signup-container">
       <div class="signup-box">
         <div class="logo-container">
-          <img src="logo.png" alt="Library Logo" class="logo" />
+          <img src="img/logo perpus.jpg" alt="Library Logo" class="logo" />
         </div>
         <h2>Perpustakaan Daerah Kabupaten Karawang</h2>
         <form action="" method="POST">
