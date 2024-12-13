@@ -163,8 +163,9 @@ $no = $offset + 1;
                                               <td><?=$row['email_account'];?></td>
                                               <td>
                                                   <button class="btn btn-primary" onclick="window.location.href='admin.php?id_edit=<?=$row['id_admin'];?>'">Edit</button>
-                                                  <!-- <a href="#" class="btn btn-danger" onclick="deleteData('<?=$row['id_admin'];?>')">Delete</a> -->
                                                   <button class="btn btn-primary" onclick="window.location.href='edit_account.php?id_edit=<?=$row['fk_account'];?>'">Edit User</button>
+                                                  <a href="#" class="btn btn-danger" onclick="deleteData('<?=$row['id_admin'];?>')">Delete</a>
+
                                               </td>
                                           </tr>
                                       <?php
