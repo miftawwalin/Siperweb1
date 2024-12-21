@@ -21,10 +21,10 @@ require "connection/koneksi.php";
         </div>
         <h2>Perpustakaan Daerah Kabupaten Karawang</h2>
         <form action="" method="POST">
-        <div class="input-group">
+        <!-- <div class="input-group">
             <label for="username">Username</label>
             <input type="username" id="username" name="username" required />
-          </div>
+          </div> -->
           <div class="input-group">
             <label for="email">Email</label>
             <input type="email" id="email" name="email" required />

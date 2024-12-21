@@ -104,7 +104,17 @@ $sekolah_result = mysqli_query($conn, $sekolah_query);
                     <form id="bukuForm">
                         <!-- Hidden field to hold the book ID for editing -->
                         <input type="hidden" name="id_edit" value="<?= isset($id_buku) ? $id_buku : '' ?>">
-
+                        <div class="form-group">
+                            <label for="fk_induk">Sekolah</label>
+                            <select class="form-control" id="fk_induk" name="fk_induk" required>
+                                <option value="">-- Pilih Sekolah --</option>
+                                <?php while ($sekolah = mysqli_fetch_assoc($sekolah_result)) { ?>
+                                    <option value="<?= $sekolah['no_induk'] ?>" <?= ($sekolah['no_induk'] == $fk_induk) ? 'selected' : '' ?>>
+                                        <?= $sekolah['nm_sekolah'] ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label for="judul">Judul Buku</label>
                             <input type="text" class="form-control" id="judul" name="judul" placeholder="Judul Buku" value="<?= $judul ?>" required>
@@ -120,17 +130,6 @@ $sekolah_result = mysqli_query($conn, $sekolah_query);
                         <div class="form-group">
                             <label for="tahun_terbit">Tahun Terbit</label>
                             <input type="text" class="form-control" id="tahun_terbit" name="tahun_terbit" placeholder="Tahun Terbit" value="<?= $tahun_terbit ?>" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="fk_induk">Sekolah</label>
-                            <select class="form-control" id="fk_induk" name="fk_induk" required>
-                                <option value="">-- Pilih Sekolah --</option>
-                                <?php while ($sekolah = mysqli_fetch_assoc($sekolah_result)) { ?>
-                                    <option value="<?= $sekolah['no_induk'] ?>" <?= ($sekolah['no_induk'] == $fk_induk) ? 'selected' : '' ?>>
-                                        <?= $sekolah['nm_sekolah'] ?>
-                                    </option>
-                                <?php } ?>
-                            </select>
                         </div>
                         <button type="button" class="btn btn-primary" id="save">Simpan</button>
                         <button type="button" class="btn btn-secondary" id="backButton">Kembali</button>

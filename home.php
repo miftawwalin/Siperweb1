@@ -42,7 +42,7 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
 
                 <!-- Data Sekolah Section -->
                 <div class="dashboard">
-                  <div class="cardhome">
+                  <div class="cardhome" style="background-color: #DD524B">
                     <div class="cardhome-icon">
                       <i class="fa fa-graduation-cap fa-3x"></i>
                     </div>
@@ -51,7 +51,7 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
                       <h2><?=$total_sekolah;?></h2>
                     </div>
                   </div>
-                  <div class="cardhome">
+                  <div class="cardhome" style="background-color:#7FD6FF">
                     <div class="cardhome-icon">
                       <i class="fa fa-book fa-3x"></i>
                     </div>
