@@ -30,7 +30,6 @@ $sekolah_search = isset($_GET['nm_sekolah']) ? mysqli_real_escape_string($conn, 
 $buku_search = isset($_GET['buku']) ? mysqli_real_escape_string($conn, $_GET['buku']) : '';
 
 // Query dasar untuk mengambil data peminjaman
-// Query dasar untuk mengambil data peminjaman dengan LEFT JOIN
 $query = "SELECT pk_id, fk_induk_sekolah, fk_buku, tgl_peminjam, tgl_kembali, 
             s.nm_sekolah, b.judul 
           FROM tblpeminjaman p
@@ -46,7 +45,6 @@ if ($sekolah_search) {
 if ($buku_search) {
     $query .= " AND LOWER(b.judul) LIKE LOWER('%$buku_search%')";
 }
-
 
 // Terapkan pagination
 $query .= " LIMIT $offset, $records_per_page";
@@ -83,6 +81,8 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Perpustakaan Daerah</title>
+    <!-- SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
 <body id="page-top">
     <div id="wrapper">
@@ -168,8 +168,10 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
                                                 <td><?=$row['tgl_peminjam'];?></td>
                                                 <td><?=$row['tgl_kembali'];?></td>
                                                 <td>
-                                                    <!-- Button untuk Edit dan Hapus -->
+                                                    <!-- Button untuk Edit -->
                                                     <button class="btn btn-primary" onclick="window.location.href='peminjaman.php?id_edit=<?=$row['pk_id'];?>'">Edit</button>
+                                                    <!-- Button untuk Delete -->
+                                                    <button class="btn btn-danger" onclick="deleteData(<?=$row['pk_id'];?>)">Delete</button>
                                                 </td>
                                             </tr>
                                         <?php
@@ -200,11 +202,12 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
                       </div>
                   </div>
               </div>
-              <!-- End of Data Peminjaman Section -->
             </div>
-            <!-- End Content -->
         </div>
     </div>
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
     <script>
       // JavaScript function to handle deletion with SweetAlert2
@@ -245,29 +248,6 @@ $activePage = basename($_SERVER['PHP_SELF'], ".php");
           text: 'Terjadi kesalahan saat menghapus data.',
         });
       <?php } ?>
-
-      // JavaScript for AJAX search and SweetAlert
-      $(document).ready(function() {
-        // AJAX search handler
-        $('#searchForm input').on('input', function() {
-          var sekolah = $('#nm_sekolah').val();
-          var buku = $('#buku').val();
-
-          // AJAX request to fetch filtered data
-          $.ajax({
-            url: 'datapeminjaman.php',
-            method: 'GET',
-            data: {
-              nm_sekolah: sekolah,
-              buku: buku,
-            },
-            success: function(response) {
-              // Replace the table content with filtered results
-              $('#tableContainer').html($(response).find('#tableContainer').html());
-            }
-          });
-        });
-      });
     </script>
 </body>
 </html>
